@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="MyScribe — social identity on Bitcoin L1. $SCRIBE presale coming soon. Explore the testnet app today.">
+  <title>MyScribe — OPNet Mainnet</title>
+  <meta property="og:title" content="MyScribe — OPNet Mainnet">
+  <meta property="og:description" content="Own your identity permanently on Bitcoin. $SCRIBE presale opens soon — the first social identity platform on Bitcoin L1.">
+  <meta property="og:url" content="https://myscribe.org/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="MyScribe">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="MyScribe — OPNet Mainnet">
+  <meta name="twitter:description" content="Own your identity permanently on Bitcoin. $SCRIBE presale opens soon.">
+  <style>
+    /* MyScribe tokens (aligned with src/app/globals.css) + premium gold gradients */
+    :root {
+      --bg-deepest: #0A1628;
+      --glass-dark: rgba(0, 51, 102, 0.95);
+      --glass-border: rgba(255, 255, 255, 0.1);
+      --blue-primary: #0066CC;
+      --blue-light: #3399FF;
+      --blue-lightest: #CCE5FF;
+      --font-display: Verdana, Arial, sans-serif;
+      --gold-gradient: linear-gradient(135deg, #f5e6b8 0%, #e8c547 22%, #c9a227 45%, #f0dc8a 62%, #a67c1a 85%, #d4af37 100%);
+      --gold-gradient-soft: linear-gradient(135deg, rgba(245, 230, 184, 0.95) 0%, rgba(201, 162, 39, 0.9) 50%, rgba(166, 124, 26, 0.95) 100%);
+      --noise-svg: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    button,
+    a.cta {
+      border-radius: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: var(--font-display);
+      background-color: var(--bg-deepest);
+      color: var(--blue-lightest);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    @keyframes reveal-in {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes gold-shimmer {
+      0%, 100% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+    }
+
+    .page {
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem max(1rem, env(safe-area-inset-right)) max(3rem, env(safe-area-inset-bottom)) max(1rem, env(safe-area-inset-left));
+      padding-top: max(1.5rem, env(safe-area-inset-top));
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Center glow + micro-vignette */
+    .page::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 120% 80% at 50% 50%, transparent 35%, rgba(10, 22, 40, 0.55) 100%),
+        radial-gradient(ellipse 60% 50% at 50% 28%, rgba(0, 102, 204, 0.2) 0%, transparent 62%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Film grain */
+    .page::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image: var(--noise-svg);
+      background-repeat: repeat;
+      background-size: 128px 128px;
+      opacity: 0.055;
+      mix-blend-mode: overlay;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .reveal {
+      animation: reveal-in 0.62s ease-out both;
+      animation-delay: var(--reveal-delay, 0ms);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .page::before,
+      .page::after {
+        animation: none;
+      }
+
+      .reveal {
+        animation: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+      }
+
+      .headline-gold,
+      .cta-primary {
+        animation: none !important;
+        background-position: 0% 50% !important;
+      }
+    }
+
+    .shell {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 52rem;
+      text-align: center;
+    }
+
+    .glass-panel {
+      position: relative;
+      background: var(--glass-dark);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.07),
+        0 0 0 1px rgba(51, 153, 255, 0.18);
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .glass-panel__theme-strip {
+      height: 4px;
+      width: 100%;
+      background: linear-gradient(90deg, var(--blue-primary) 0%, var(--blue-light) 35%, #e8c547 70%, #c9a227 100%);
+      flex-shrink: 0;
+    }
+
+    .glass-panel__inner {
+      padding: 2.25rem 1.25rem 2.75rem;
+    }
+
+    @media (min-width: 768px) {
+      .glass-panel__inner {
+        padding: 3.25rem 2.75rem 3.75rem;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .glass-panel__inner {
+        padding: 1.75rem 1rem 2.25rem;
+      }
+    }
+
+    .launch-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.4rem 1rem 0.45rem;
+      border: 1px solid transparent;
+      background:
+        linear-gradient(var(--glass-dark), var(--glass-dark)) padding-box,
+        var(--gold-gradient) border-box;
+      background-origin: border-box;
+      background-clip: padding-box, border-box;
+      font-size: 0.65rem;
+      font-weight: bold;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 1.75rem;
+    }
+
+    .launch-badge__dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--gold-gradient);
+      flex-shrink: 0;
+    }
+
+    .launch-badge__text {
+      background: var(--gold-gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+    }
+
+    h1 {
+      font-family: var(--font-display);
+      font-size: clamp(1.75rem, 5vw, 3.25rem);
+      font-weight: bold;
+      line-height: 1.12;
+      margin-bottom: 1.2rem;
+    }
+
+    @media (min-width: 768px) {
+      h1 {
+        line-height: 1.08;
+      }
+    }
+
+    .headline-white {
+      color: #fff;
+      display: block;
+    }
+
+    .headline-gold {
+      display: block;
+      background: var(--gold-gradient);
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+      animation: gold-shimmer 14s ease-in-out infinite;
+    }
+
+    .subhead {
+      max-width: 36rem;
+      margin: 0 auto 1rem;
+      font-size: clamp(0.95rem, 2.2vw, 1.125rem);
+      line-height: 1.68;
+      color: rgba(204, 229, 255, 0.88);
+    }
+
+    .tagline-small {
+      font-size: 0.7rem;
+      font-weight: bold;
+      letter-spacing: 0.17em;
+      text-transform: uppercase;
+      background: var(--gold-gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 2rem;
+    }
+
+    .presale-label {
+      font-size: 0.65rem;
+      font-weight: bold;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      background: var(--gold-gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1rem;
+    }
+
+    .countdown {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.65rem;
+      max-width: 20rem;
+      margin: 0 auto 2.5rem;
+      justify-content: center;
+    }
+
+    @media (min-width: 480px) {
+      .countdown {
+        display: flex;
+        flex-wrap: wrap;
+        max-width: none;
+        margin-bottom: 2.5rem;
+        justify-content: center;
+      }
+    }
+
+    .countdown__unit {
+      padding: 1px;
+      background: var(--gold-gradient);
+      min-width: 0;
+      flex: 1 1 calc(25% - 0.5rem);
+      max-width: 6.5rem;
+    }
+
+    @media (max-width: 479px) {
+      .countdown__unit {
+        max-width: none;
+      }
+    }
+
+    .countdown__inner {
+      background: rgba(0, 26, 51, 0.92);
+      padding: 0.85rem 0.5rem 0.65rem;
+      min-height: 5.25rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .countdown__value {
+      font-family: var(--font-display);
+      font-size: clamp(1.65rem, 5vw, 2.2rem);
+      font-weight: bold;
+      line-height: 1;
+      background: var(--gold-gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .countdown__label {
+      margin-top: 0.45rem;
+      font-size: 0.58rem;
+      font-weight: bold;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      color: rgba(180, 200, 220, 0.75);
+    }
+
+    .ctas {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.85rem;
+    }
+
+    @media (min-width: 480px) {
+      .ctas {
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+    }
+
+    .cta-row {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .cta-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      min-height: 44px;
+      padding: 0.65rem 1.75rem;
+      font-family: var(--font-display);
+      font-size: 0.8rem;
+      font-weight: bold;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border: none;
+      cursor: not-allowed;
+      opacity: 0.45;
+      pointer-events: none;
+      color: var(--bg-deepest);
+      background-image: var(--gold-gradient);
+      background-size: 200% 200%;
+      animation: gold-shimmer 14s ease-in-out infinite;
+    }
+
+    .cta-primary[aria-disabled="true"] {
+      user-select: none;
+    }
+
+    .cta-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      min-height: 44px;
+      padding: 0.65rem 1.75rem;
+      font-family: var(--font-display);
+      font-size: 0.8rem;
+      font-weight: bold;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: rgba(255, 255, 255, 0.95);
+      border: 1px solid transparent;
+      background:
+        linear-gradient(rgba(0, 26, 51, 0.4), rgba(0, 26, 51, 0.4)) padding-box,
+        var(--gold-gradient) border-box;
+      background-origin: border-box;
+      background-clip: padding-box, border-box;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .cta-secondary:hover {
+      color: #fff;
+      background:
+        linear-gradient(rgba(0, 102, 204, 0.25), rgba(0, 102, 204, 0.15)) padding-box,
+        var(--gold-gradient) border-box;
+      background-origin: border-box;
+      background-clip: padding-box, border-box;
+    }
+
+    .cta-secondary:focus-visible {
+      outline: 2px solid var(--blue-light);
+      outline-offset: 3px;
+    }
+
+    .icon {
+      width: 1.15em;
+      height: 1.15em;
+      flex-shrink: 0;
+    }
+
+    .social-links {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      margin-top: 2rem;
+      padding-top: 1.75rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      min-height: 44px;
+      padding: 0.5rem 1rem;
+      text-decoration: none;
+      font-size: 0.65rem;
+      font-weight: bold;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(214, 232, 255, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: rgba(0, 26, 51, 0.35);
+      transition: color 0.2s, border-color 0.2s, background 0.2s;
+      border-radius: 0;
+    }
+
+    .social-link:hover {
+      color: #fff;
+      border-color: rgba(212, 175, 55, 0.55);
+      background: rgba(0, 102, 204, 0.12);
+    }
+
+    .social-link:focus-visible {
+      outline: 2px solid rgba(232, 197, 71, 0.95);
+      outline-offset: 3px;
+    }
+
+    .social-link svg {
+      width: 1.1rem;
+      height: 1.1rem;
+      flex-shrink: 0;
+      fill: currentColor;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="shell">
+      <div class="glass-panel">
+        <div class="glass-panel__theme-strip" aria-hidden="true"></div>
+        <div class="glass-panel__inner">
+          <div class="launch-badge reveal" style="--reveal-delay: 0ms" role="status">
+            <span class="launch-badge__dot" aria-hidden="true"></span>
+            <span class="launch-badge__text">OPNET MAINNET LAUNCH</span>
+          </div>
+
+          <h1 class="reveal" style="--reveal-delay: 75ms">
+            <span class="headline-white">Own Your Identity.</span>
+            <span class="headline-gold">Permanently on Bitcoin.</span>
+          </h1>
+
+          <p class="subhead reveal" style="--reveal-delay: 150ms">
+            The first social identity platform built on Bitcoin L1. Deploy your personal smart contract,
+            create your legend, and own your data forever.
+          </p>
+          <p class="tagline-small reveal" style="--reveal-delay: 225ms">One UTXO. Infinite expression.</p>
+
+          <p class="presale-label reveal" style="--reveal-delay: 300ms">$SCRIBE PRESALE OPENS</p>
+
+          <div class="countdown reveal" id="countdown" style="--reveal-delay: 375ms" aria-live="polite">
+            <div class="countdown__unit">
+              <div class="countdown__inner">
+                <div class="countdown__value" id="cd-days">00</div>
+                <div class="countdown__label">Days</div>
+              </div>
+            </div>
+            <div class="countdown__unit">
+              <div class="countdown__inner">
+                <div class="countdown__value" id="cd-hours">00</div>
+                <div class="countdown__label">Hours</div>
+              </div>
+            </div>
+            <div class="countdown__unit">
+              <div class="countdown__inner">
+                <div class="countdown__value" id="cd-min">00</div>
+                <div class="countdown__label">Min</div>
+              </div>
+            </div>
+            <div class="countdown__unit">
+              <div class="countdown__inner">
+                <div class="countdown__value" id="cd-sec">00</div>
+                <div class="countdown__label">Sec</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="ctas reveal" style="--reveal-delay: 450ms">
+            <button type="button" class="cta-primary" aria-disabled="true" tabindex="-1">
+              <span class="cta-row">
+                <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M12 2.5c1.8 3.2 3.5 6.8 3.5 11H8.5c0-4.2 1.7-7.8 3.5-11zM11 14h2v4h-2v-4zm-3.5 1.5L6 22l4.5-2-1-2H9l-1.5 2zm11 0L16 15h-1.5l-1 2L18 22l-1.5-6.5zM12 9a1.5 1.5 0 110 3 1.5 1.5 0 010-3z"/>
+                </svg>
+                Join the Presale
+              </span>
+            </button>
+            <a class="cta-secondary" href="https://testnet.myscribe.org/" rel="noopener noreferrer" target="_blank">
+              <span class="cta-row">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                  <polyline points="15 3 21 3 21 9"/>
+                  <line x1="10" y1="14" x2="21" y2="3"/>
+                </svg>
+                Explore the App
+              </span>
+            </a>
+          </div>
+
+          <nav class="social-links reveal" style="--reveal-delay: 525ms" aria-label="Community">
+            <a
+              class="social-link"
+              href="https://x.com/myscribebtc"
+              rel="noopener noreferrer"
+              target="_blank"
+              aria-label="MyScribe on X"
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+              </svg>
+              X
+            </a>
+            <a
+              class="social-link"
+              href="https://t.me/+i6kJeFuWujk5Zjgx"
+              rel="noopener noreferrer"
+              target="_blank"
+              aria-label="MyScribe Telegram group"
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+              </svg>
+              Telegram
+            </a>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      /* Presale opens: 6:00 PM America/New_York on Mon Mar 23, 2026 (EDT, UTC-4) */
+      var TARGET_MS = Date.parse("2026-03-23T22:00:00.000Z");
+
+      function pad2(n) {
+        return n < 10 ? "0" + n : String(n);
+      }
+
+      function tick() {
+        var now = Date.now();
+        var remaining = Math.max(0, TARGET_MS - now);
+        var sec = Math.floor(remaining / 1000);
+        var days = Math.floor(sec / 86400);
+        sec -= days * 86400;
+        var hours = Math.floor(sec / 3600);
+        sec -= hours * 3600;
+        var min = Math.floor(sec / 60);
+        sec -= min * 60;
+
+        var daysEl = document.getElementById("cd-days");
+        daysEl.textContent = days > 99 ? String(days) : pad2(days);
+        document.getElementById("cd-hours").textContent = pad2(hours);
+        document.getElementById("cd-min").textContent = pad2(min);
+        document.getElementById("cd-sec").textContent = pad2(sec);
+      }
+
+      tick();
+      setInterval(tick, 1000);
+    })();
+  </script>
+</body>
+</html>
