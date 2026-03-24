@@ -1,0 +1,56 @@
+{
+    "targets": {
+        "token": {
+            "outFile": "build/ScribeToken.wasm",
+            "use": ["abort=src/token/index/abort"]
+        },
+        "rewards": {
+            "outFile": "build/ScribeRewards.wasm",
+            "use": ["abort=src/rewards/index/abort"]
+        },
+        "presale": {
+            "outFile": "build/ScribePresale.wasm",
+            "use": ["abort=src/presale/index/abort"]
+        },
+        "vesting": {
+            "outFile": "build/ScribeVesting.wasm",
+            "use": ["abort=src/vesting/index/abort"]
+        },
+        "governance": {
+            "outFile": "build/ScribeGovernance.wasm",
+            "use": ["abort=src/governance/index/abort"]
+        },
+        "reserve": {
+            "outFile": "build/GovernanceReserve.wasm",
+            "use": ["abort=src/reserve/index/abort"]
+        },
+        "treasury": {
+            "outFile": "build/ScribeTreasury.wasm",
+            "use": ["abort=src/treasury/index/abort"]
+        }
+    },
+    "options": {
+        "bindings": "esm",
+        "exportRuntime": true,
+        "lib": ["node_modules/@btc-vision/btc-runtime/runtime"],
+        "sourceMap": false,
+        "optimizeLevel": 3,
+        "shrinkLevel": 1,
+        "converge": true,
+        "noAssert": false,
+        "enable": [
+            "sign-extension",
+            "mutable-globals",
+            "nontrapping-f2i",
+            "bulk-memory",
+            "simd",
+            "reference-types",
+            "multi-value"
+        ],
+        "runtime": "stub",
+        "memoryBase": 0,
+        "initialMemory": 1,
+        "exportStart": "start",
+        "transform": "@btc-vision/opnet-transform"
+    }
+}

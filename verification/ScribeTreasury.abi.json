@@ -1,0 +1,263 @@
+{
+    "functions": [
+        {
+            "name": "configure",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [
+                {
+                    "name": "token",
+                    "type": "ADDRESS"
+                },
+                {
+                    "name": "governance",
+                    "type": "ADDRESS"
+                },
+                {
+                    "name": "teamAddr",
+                    "type": "ADDRESS"
+                },
+                {
+                    "name": "devAddr",
+                    "type": "ADDRESS"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "success",
+                    "type": "BOOL"
+                }
+            ]
+        },
+        {
+            "name": "setTGE",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [],
+            "outputs": [
+                {
+                    "name": "success",
+                    "type": "BOOL"
+                }
+            ]
+        },
+        {
+            "name": "releaseCommunityFunds",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [
+                {
+                    "name": "recipient",
+                    "type": "ADDRESS"
+                },
+                {
+                    "name": "amount",
+                    "type": "UINT256"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "success",
+                    "type": "BOOL"
+                }
+            ]
+        },
+        {
+            "name": "releaseTreasuryFunds",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [
+                {
+                    "name": "recipient",
+                    "type": "ADDRESS"
+                },
+                {
+                    "name": "amount",
+                    "type": "UINT256"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "success",
+                    "type": "BOOL"
+                }
+            ]
+        },
+        {
+            "name": "claimTeam",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [],
+            "outputs": [
+                {
+                    "name": "amount",
+                    "type": "UINT256"
+                }
+            ]
+        },
+        {
+            "name": "claimDev",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [],
+            "outputs": [
+                {
+                    "name": "amount",
+                    "type": "UINT256"
+                }
+            ]
+        },
+        {
+            "name": "communityInfo",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [],
+            "outputs": [
+                {
+                    "name": "balance",
+                    "type": "UINT256"
+                },
+                {
+                    "name": "governanceAddress",
+                    "type": "ADDRESS"
+                }
+            ]
+        },
+        {
+            "name": "teamVestingInfo",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [],
+            "outputs": [
+                {
+                    "name": "total",
+                    "type": "UINT256"
+                },
+                {
+                    "name": "claimed",
+                    "type": "UINT256"
+                },
+                {
+                    "name": "claimable",
+                    "type": "UINT256"
+                },
+                {
+                    "name": "cliffBlocks",
+                    "type": "UINT256"
+                },
+                {
+                    "name": "vestBlocks",
+                    "type": "UINT256"
+                },
+                {
+                    "name": "wallet",
+                    "type": "ADDRESS"
+                }
+            ]
+        },
+        {
+            "name": "devVestingInfo",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [],
+            "outputs": [
+                {
+                    "name": "total",
+                    "type": "UINT256"
+                },
+                {
+                    "name": "claimed",
+                    "type": "UINT256"
+                },
+                {
+                    "name": "claimable",
+                    "type": "UINT256"
+                },
+                {
+                    "name": "cliffBlocks",
+                    "type": "UINT256"
+                },
+                {
+                    "name": "vestBlocks",
+                    "type": "UINT256"
+                },
+                {
+                    "name": "wallet",
+                    "type": "ADDRESS"
+                }
+            ]
+        },
+        {
+            "name": "treasuryInfo",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [],
+            "outputs": [
+                {
+                    "name": "balance",
+                    "type": "UINT256"
+                },
+                {
+                    "name": "lockBlocks",
+                    "type": "UINT256"
+                },
+                {
+                    "name": "isUnlocked",
+                    "type": "BOOL"
+                }
+            ]
+        },
+        {
+            "name": "getAllocations",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [],
+            "outputs": [
+                {
+                    "name": "communityBalance",
+                    "type": "UINT256"
+                },
+                {
+                    "name": "teamTotal",
+                    "type": "UINT256"
+                },
+                {
+                    "name": "teamClaimed",
+                    "type": "UINT256"
+                },
+                {
+                    "name": "devTotal",
+                    "type": "UINT256"
+                },
+                {
+                    "name": "devClaimed",
+                    "type": "UINT256"
+                },
+                {
+                    "name": "treasuryBalance",
+                    "type": "UINT256"
+                },
+                {
+                    "name": "treasuryUnlocked",
+                    "type": "BOOL"
+                },
+                {
+                    "name": "tgeSet",
+                    "type": "BOOL"
+                }
+            ]
+        }
+    ],
+    "events": []
+}

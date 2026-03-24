@@ -1,0 +1,399 @@
+{
+    "functions": [
+        {
+            "name": "configure",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [
+                {
+                    "name": "token",
+                    "type": "ADDRESS"
+                },
+                {
+                    "name": "treasury",
+                    "type": "ADDRESS"
+                },
+                {
+                    "name": "lp",
+                    "type": "ADDRESS"
+                },
+                {
+                    "name": "collectionTweakedKey",
+                    "type": "UINT256"
+                },
+                {
+                    "name": "collectionAddress",
+                    "type": "STRING"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "success",
+                    "type": "BOOL"
+                }
+            ]
+        },
+        {
+            "name": "setMaxContribution",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [
+                {
+                    "name": "amount",
+                    "type": "UINT256"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "success",
+                    "type": "BOOL"
+                }
+            ]
+        },
+        {
+            "name": "start",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [],
+            "outputs": [
+                {
+                    "name": "success",
+                    "type": "BOOL"
+                }
+            ]
+        },
+        {
+            "name": "end",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [],
+            "outputs": [
+                {
+                    "name": "success",
+                    "type": "BOOL"
+                }
+            ]
+        },
+        {
+            "name": "buy",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [
+                {
+                    "name": "vote",
+                    "type": "UINT256"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "tokensReceived",
+                    "type": "UINT256"
+                }
+            ]
+        },
+        {
+            "name": "currentPrice",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [],
+            "outputs": [
+                {
+                    "name": "price",
+                    "type": "UINT256"
+                }
+            ]
+        },
+        {
+            "name": "buyerInfo",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [
+                {
+                    "name": "buyer",
+                    "type": "ADDRESS"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "tokens",
+                    "type": "UINT256"
+                },
+                {
+                    "name": "btcSpent",
+                    "type": "UINT256"
+                }
+            ]
+        },
+        {
+            "name": "getContribution",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [
+                {
+                    "name": "account",
+                    "type": "ADDRESS"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "contribution",
+                    "type": "UINT256"
+                }
+            ]
+        },
+        {
+            "name": "presaleInfo",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [],
+            "outputs": [
+                {
+                    "name": "totalSold",
+                    "type": "UINT256"
+                },
+                {
+                    "name": "totalBtc",
+                    "type": "UINT256"
+                },
+                {
+                    "name": "active",
+                    "type": "BOOL"
+                },
+                {
+                    "name": "ended",
+                    "type": "BOOL"
+                }
+            ]
+        },
+        {
+            "name": "getVoteCounts",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [],
+            "outputs": [
+                {
+                    "name": "burnVotePower",
+                    "type": "UINT256"
+                },
+                {
+                    "name": "lmVotePower",
+                    "type": "UINT256"
+                },
+                {
+                    "name": "abstainPower",
+                    "type": "UINT256"
+                }
+            ]
+        },
+        {
+            "name": "getVoterCounts",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [],
+            "outputs": [
+                {
+                    "name": "burnCount",
+                    "type": "UINT256"
+                },
+                {
+                    "name": "lmCount",
+                    "type": "UINT256"
+                },
+                {
+                    "name": "abstainCount",
+                    "type": "UINT256"
+                }
+            ]
+        },
+        {
+            "name": "getMaxContribution",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [],
+            "outputs": [
+                {
+                    "name": "maxContribution",
+                    "type": "UINT256"
+                }
+            ]
+        },
+        {
+            "name": "startVesting",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [],
+            "outputs": [
+                {
+                    "name": "success",
+                    "type": "BOOL"
+                }
+            ]
+        },
+        {
+            "name": "claim",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [],
+            "outputs": [
+                {
+                    "name": "amount",
+                    "type": "UINT256"
+                }
+            ]
+        },
+        {
+            "name": "claimable",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [
+                {
+                    "name": "account",
+                    "type": "ADDRESS"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "amount",
+                    "type": "UINT256"
+                }
+            ]
+        },
+        {
+            "name": "vestingInfo",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [
+                {
+                    "name": "account",
+                    "type": "ADDRESS"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "totalVesting",
+                    "type": "UINT256"
+                },
+                {
+                    "name": "vestedSoFar",
+                    "type": "UINT256"
+                },
+                {
+                    "name": "claimed",
+                    "type": "UINT256"
+                }
+            ]
+        },
+        {
+            "name": "vestingStatus",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [],
+            "outputs": [
+                {
+                    "name": "started",
+                    "type": "BOOL"
+                },
+                {
+                    "name": "startBlock",
+                    "type": "UINT256"
+                },
+                {
+                    "name": "vestingBlocks",
+                    "type": "UINT256"
+                }
+            ]
+        },
+        {
+            "name": "executeBurn",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [],
+            "outputs": [
+                {
+                    "name": "success",
+                    "type": "BOOL"
+                }
+            ]
+        },
+        {
+            "name": "executeLiquidityMining",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [
+                {
+                    "name": "farmingAddr",
+                    "type": "ADDRESS"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "success",
+                    "type": "BOOL"
+                }
+            ]
+        },
+        {
+            "name": "reserveStatus",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [],
+            "outputs": [
+                {
+                    "name": "reserveAmount",
+                    "type": "UINT256"
+                },
+                {
+                    "name": "burnExecuted",
+                    "type": "BOOL"
+                },
+                {
+                    "name": "lmExecuted",
+                    "type": "BOOL"
+                },
+                {
+                    "name": "burnWins",
+                    "type": "BOOL"
+                }
+            ]
+        },
+        {
+            "name": "withdrawUnsold",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [
+                {
+                    "name": "recipient",
+                    "type": "ADDRESS"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "success",
+                    "type": "BOOL"
+                }
+            ]
+        }
+    ],
+    "events": []
+}

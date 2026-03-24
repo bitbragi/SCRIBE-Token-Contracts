@@ -1,0 +1,29 @@
+{
+    "name": "scribe-contracts",
+    "version": "1.0.0",
+    "type": "module",
+    "scripts": {
+        "build:token": "asc src/token/index.ts --config asconfig.json --target token",
+        "build:rewards": "asc src/rewards/index.ts --config asconfig.json --target rewards",
+        "build:presale": "asc src/presale/index.ts --config asconfig.json --target presale",
+        "build:vesting": "asc src/vesting/index.ts --config asconfig.json --target vesting",
+        "build:governance": "asc src/governance/index.ts --config asconfig.json --target governance",
+        "build:reserve": "asc src/reserve/index.ts --config asconfig.json --target reserve",
+        "build:treasury": "asc src/treasury/index.ts --config asconfig.json --target treasury",
+        "build:all": "npm run build:token && npm run build:rewards && npm run build:presale && npm run build:vesting && npm run build:governance && npm run build:reserve && npm run build:treasury",
+        "clean": "rm -rf build/*",
+        "postinstall": "node scripts/patch-noble-hashes.js"
+    },
+    "dependencies": {
+        "@btc-vision/as-bignum": "^1.0.0",
+        "@btc-vision/btc-runtime": "^1.11.0-rc.10"
+    },
+    "devDependencies": {
+        "@assemblyscript/loader": "^0.28.10",
+        "@btc-vision/assemblyscript": "^0.29.3",
+        "@btc-vision/opnet-transform": "^1.2.2"
+    },
+    "overrides": {
+        "@noble/hashes": "2.0.1"
+    }
+}
