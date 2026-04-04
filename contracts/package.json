@@ -1,0 +1,27 @@
+{
+    "name": "scribe-v2-contracts",
+    "version": "2.0.0",
+    "type": "module",
+    "scripts": {
+        "build:token": "asc src/token/index.ts --config asconfig.json --target token",
+        "build:faucet": "asc src/faucet/index.ts --config asconfig.json --target faucet",
+        "build:rewards": "asc src/rewards/index.ts --config asconfig.json --target rewards",
+        "build:governance": "asc src/governance/index.ts --config asconfig.json --target governance",
+        "build:vesting": "asc src/vesting/index.ts --config asconfig.json --target vesting",
+        "build:treasury": "asc src/treasury/index.ts --config asconfig.json --target treasury",
+        "build:all": "npm run build:token && npm run build:faucet && npm run build:rewards && npm run build:governance && npm run build:vesting && npm run build:treasury",
+        "clean": "rm -rf build/*"
+    },
+    "dependencies": {
+        "@btc-vision/as-bignum": "^1.0.0",
+        "@btc-vision/btc-runtime": "^1.11.0"
+    },
+    "devDependencies": {
+        "@assemblyscript/loader": "^0.28.10",
+        "@btc-vision/assemblyscript": "^0.29.3",
+        "@btc-vision/opnet-transform": "^1.2.2"
+    },
+    "overrides": {
+        "@noble/hashes": "2.0.1"
+    }
+}
